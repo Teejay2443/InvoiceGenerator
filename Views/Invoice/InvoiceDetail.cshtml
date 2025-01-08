@@ -1,0 +1,44 @@
+﻿@using InvoiceGenerator.Dto;
+@using InvoiceGenerator.Dto;
+@model InvoiceDto;
+@{
+    ViewData["Title"] = "Drug Detail";
+    var userId = Context.GetRouteValue("userId");
+}
+
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-header">
+            @Model.BuyerName's Invoice
+        </div>
+        <div class="card-body">
+            <p class="card-text">Buyer Name: @Model.BuyerName</p>
+
+            <p class="card-text">Services Rendered:</p>
+            <ul>
+                @foreach (var service in Model.ServiceRenderred)
+                {
+                    <li>@service</li>
+                }
+            </ul>
+
+            <p class="card-text">Areas of Coverage:</p>
+            <ul>
+                @foreach (var area in Model.AreaOfCoverage)
+                {
+                    <li>@area</li>
+                }
+            </ul>
+
+            <p class="card-text">Service Start Date: @Model.ServiceStartDate</p>
+            <p class="card-text">Service End Date: @Model.ServiceEndDate</p>
+            <p class="card-text">Customer Address: @Model.Address</p>
+            <p class="card-text">Total Cost: @Model.TotalCost</p>
+
+            <a asp-controller="Invoice" asp-action="UpdateInvoice"
+               asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+            <a asp-controller="Invoice" asp-action="Invoices" class="btn btn-danger">Back To Home</a>
+
+        </div>
+    </div>
+</div>

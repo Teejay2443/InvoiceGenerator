@@ -1,0 +1,88 @@
+﻿@using InvoiceGenerator.Dto;
+  @using InvoiceGenerator.Dto;
+@model InvoiceDto;
+@{
+    ViewData["Title"] = "Create Invoice";
+    var Id = Context.GetRouteValue(" Id");
+}
+
+<div class="col-md-8">
+    <form asp-controller="Invoice" asp-action="UpdateInvoice">
+        <div class="mb-3">
+            <label class="form-label">Customer Name</label>
+            <input type="text" class="form-control" name="BuyerName" placeholder="CustomerName" required  value="@Model.BuyerName">
+        </div>
+        <label for="ServiceRenderred" class="form-label">Service Rendered</label>
+        @if (ViewData["SelectService"] != null)
+        {
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="serviceDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Select Services
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="serviceDropdown">
+                    @foreach (var service in ViewData["SelectService"] as List<SelectServiceDto>)
+                    {
+                        <li>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="ServiceRenderred" value="@service.Name" id="service-@service.Name" />
+                                <label class="form-check-label" for="service-@service.Name">@service.Name</label>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+        else
+        {
+            <div>No Service available</div>
+        }
+
+        <label for="AreaOfCoverage" class="form-label">AreaOfCoverage</label>
+        @if (ViewData["SelectArea"] != null)
+        {
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="areaDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Select Area of Coverage
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="areaDropdown">
+                    @foreach (var area in ViewData["SelectArea"] as List<SelectAreaDto>)
+                    {
+                        <li>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="AreaOfCoverage" value="@area.Name" id="area-@area.Name" />
+                                <label class="form-check-label" for="area-@area.Name">@area.Name</label>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+        else
+        {
+            <div>No area available</div>
+        }
+        <div class="mb-3">
+            <label class="form-label">Customer Address</label>
+            <input type="text" class="form-control" name="Address" placeholder="Customer Address" required  value="@Model.Address">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">ServiceStartDate</label>
+            <input type="date" class="form-control" name="ServiceStartDate" placeholder="ServiceStartDate" required value="@Model.ServiceStartDate">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">ServiceEndDate</label>
+            <input type="date" class="form-control" name="ServiceEndDate" placeholder="ServiceEndDate" required value="@Model.ServiceEndDate">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">TotalCost</label>
+            <input type="number" class="form-control" name="TotalCost" placeholder="TotalCost" required value="@Model.TotalCost">
+        </div>
+
+        <div class="row">
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+</div>
+
