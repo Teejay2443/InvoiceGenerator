@@ -33,10 +33,8 @@ namespace InvoiceGenerator.Controllers
             var result = await _ServiceRenderServices.CreateService(request);
             if (result.IsSuccessful)
             {
-                _notyfService.Success("Service created sucessfully");
                 return RedirectToAction("Services");
             }
-            _notyfService.Error("Service created unsucessfully");
             return RedirectToAction("Services");
         }
         [HttpGet("delete-service/{Id}")]
@@ -45,10 +43,8 @@ namespace InvoiceGenerator.Controllers
             var result = await _ServiceRenderServices.Delete(Id);
             if (result.IsSuccessful)
             {
-                _notyfService.Success("Service deleted sucessfully");
                 return RedirectToAction("Services");
             }
-            _notyfService.Success("Service not deleted sucessfully");
             return RedirectToAction("Services");
         }
         [HttpGet("Service/{Id}")]
@@ -69,11 +65,8 @@ namespace InvoiceGenerator.Controllers
             var result = await _ServiceRenderServices.UpdateService(Id, request);
             if (result.IsSuccessful)
             {
-                _notyfService.Success("Service Updated sucessfully");
                 return RedirectToAction("ServiceDetail", new { Id = Id });
             }
-
-            _notyfService.Error("Service not updated sucessfully");
             return RedirectToAction("Services");
         }
     }

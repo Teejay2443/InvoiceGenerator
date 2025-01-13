@@ -33,10 +33,8 @@ namespace InvoiceGenerator.Controllers
             var result = await _AreaCoveredServices.CreateAreaCovered(request);
             if (result.IsSuccessful)
             {
-                _notyfService.Success("AreaCovered created sucessfully");
                 return RedirectToAction("Areas");
             }
-            _notyfService.Error("AreaCovered created unsucessfully");
             return RedirectToAction("Areas");
         }
         [HttpGet("delete-area/{Id}")]
@@ -45,10 +43,8 @@ namespace InvoiceGenerator.Controllers
             var result = await _AreaCoveredServices.Delete(Id);
             if (result.IsSuccessful)
             {
-                _notyfService.Success("Area Covered deleted sucessfully");
                 return RedirectToAction("Areas");
             }
-            _notyfService.Success("Area Covered not deleted sucessfully");
             return RedirectToAction("Areas");
         }
         [HttpGet("area-detail/{Id}")]
@@ -69,11 +65,8 @@ namespace InvoiceGenerator.Controllers
             var result = await _AreaCoveredServices.UpdateAreaCovered(Id, request);
             if (result.IsSuccessful)
             {
-                _notyfService.Success("Area Covered Updated sucessfully");
                 return RedirectToAction("Areas", new { Id = Id });
             }
-
-            _notyfService.Error("Area Covered not updated sucessfully");
             return RedirectToAction("Areas");
         }
 

@@ -17,6 +17,7 @@
 			<tr>
 				<th scope="col">#</th>
 				<th scope="col">Name</th>
+				<th scope="col" class="text-center">Actions</th>
 
 			</tr>
 		</thead>
@@ -30,7 +31,10 @@
 						<th scope="row">@i</th>
 						<td>@item.Name</td>
 						<td class="text-center">
-							<a asp-controller="Service" asp-action="ServiceDetail" asp-route-id="@item.Id" class="btn btn-info btn-sm">View Service</a>
+						<td>
+							<a asp-controller="Service" asp-action="ServiceDetail" asp-route-id="@item.Id" class="btn btn-sm btn-success">
+								<i class="fas fa-edit"></i> Details
+							</a>
 							<a asp-controller="Service" asp-action="DeleteService" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
 						</td>
 					</tr>
@@ -47,7 +51,7 @@
 			}
 		</tbody>
 	</table>
-
+	<a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-sm">Back To Home </a>
 	<div class="text-end">
 	</div>
 </div>

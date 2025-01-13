@@ -74,7 +74,9 @@
 						<td>@item.ServiceStartDate</td>
 						<td>@item.ServiceEndDate</td>
 						<td class="text-center">
-							<a asp-controller="Invoice" asp-action="InvoiceDetail"  asp-route-id="@item.Id" class="btn btn-info btn-sm">View Invoice</a>
+							<a asp-controller="Invoice" asp-action="InvoiceDetail" asp-route-id="@item.Id" class="btn btn-sm btn-success">
+								<i class="fas fa-edit"></i> Details
+							</a>
 							<a asp-controller="Invoice" asp-action="DeleteInvoice" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
 						</td>
 					</tr>
@@ -96,3 +98,5 @@
 		
 	</div>
 </div>
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-sm">Back To Home </a>

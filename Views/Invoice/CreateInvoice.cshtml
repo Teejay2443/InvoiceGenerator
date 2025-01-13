@@ -121,7 +121,6 @@
             button.setAttribute('aria-expanded', !isExpanded);
             dropdownMenu.style.display = isExpanded ? 'none' : 'block';
         }
-
         document.addEventListener('click', function (event) {
             // Close other dropdowns if clicked outside
             ['serviceDropdown', 'areaDropdown'].forEach(dropdownId => {
@@ -134,7 +133,6 @@
                 }
             });
         });
-
         function updateSelected(name, displayBoxId) {
             const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
             const displayBox = document.getElementById(displayBoxId);
