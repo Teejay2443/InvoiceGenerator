@@ -81,7 +81,6 @@ namespace InvoiceGenerator.Services
                         Id = x.Id,
                         Name = x.Name,
 
-
                     }).ToList();
 
                     return new BaseResponse<List<AreaCoveredDto>> { Message = "Data retrieved successfuly", IsSuccessful = true, Data = data };
@@ -107,7 +106,6 @@ namespace InvoiceGenerator.Services
                     {
                         Id = area.Id,
                         Name = area.Name,
-
                     };
                     return new BaseResponse<AreaCoveredDto> { Message = "Data retrieved successfully", IsSuccessful = true, Data = data };
                 }

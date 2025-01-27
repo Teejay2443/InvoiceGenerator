@@ -1,11 +1,9 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
-using Azure.Core;
 using InvoiceGenerator.Dto;
 using InvoiceGenerator.Interface.IRepositories;
 using InvoiceGenerator.Interface.IServices;
 using InvoiceGenerator.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Net;
+using Microsoft.EntityFrameworkCore;
 
 namespace InvoiceGenerator.Services
 {
@@ -20,6 +18,7 @@ namespace InvoiceGenerator.Services
             _dbContext = dbContext;
             _notyfService = notyfService;
         }
+
         public async Task<BaseResponse<bool>> CreateInvoice(CreateInvoiceDto request)
         {
             try
@@ -145,9 +144,9 @@ namespace InvoiceGenerator.Services
             }
         }
 
-        public Task<BaseResponse<Invoice>> GetInvoiceById(Guid Id)
+        public async Task<Invoice> GetInvoiceById(Guid Id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Invoices.FirstOrDefaultAsync();
         }
 
         public List<SelectServiceDto> GetServiceSelect()

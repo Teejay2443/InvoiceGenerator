@@ -2,12 +2,9 @@
 using InvoiceGenerator.Dto;
 using InvoiceGenerator.Interface.IRepositories;
 using InvoiceGenerator.Interface.IServices;
-using InvoiceGenerator.Models;
-using InvoiceGenerator.Repository;
+using InvoiceGenerator.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections.Generic;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
 
 namespace InvoiceGenerator.Controllers
 {
@@ -16,13 +13,19 @@ namespace InvoiceGenerator.Controllers
     {
         private readonly IInvoiceServices _InvoiceServices;
         private readonly IServiceRenderRepository _ServiceRenderRepository;
+        private readonly IViewEngine _viewEngine;
         private readonly INotyfService _notyfService;
 
-        public InvoiceController(IInvoiceServices InvoiceServices, INotyfService notyfService, IServiceRenderRepository ServiceRenderRepository)
+        public InvoiceController(
+            IInvoiceServices InvoiceServices,
+            INotyfService notyfService,
+            IServiceRenderRepository ServiceRenderRepository
+           )
         {
-            _ServiceRenderRepository = ServiceRenderRepository;
             _InvoiceServices = InvoiceServices;
             _notyfService = notyfService;
+            _ServiceRenderRepository = ServiceRenderRepository;
+            
         }
         [HttpGet("all-invoices")]
         public async Task<IActionResult> Invoices()
@@ -30,6 +33,9 @@ namespace InvoiceGenerator.Controllers
             var result = await _InvoiceServices.GetAllInvoice();
             return View(result.Data);
         }
+
+
+
         [HttpGet("create-invoice")]
         public async Task<IActionResult> CreateInvoice()
         {
@@ -48,8 +54,6 @@ namespace InvoiceGenerator.Controllers
             ViewData["SelectArea"] = selectArea;
             return View();
         }
-
-
         [HttpPost("create-invoice")]
         public async Task<IActionResult> CreateInvoiceAsync(CreateInvoiceDto request)
         {

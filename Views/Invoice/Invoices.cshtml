@@ -75,10 +75,15 @@
 						<td>@item.ServiceEndDate</td>
 						<td class="text-center">
 							<a asp-controller="Invoice" asp-action="InvoiceDetail" asp-route-id="@item.Id" class="btn btn-sm btn-success">
-								<i class="fas fa-edit"></i> Details
+								<i class="fas fa-pencil-alt"></i> Details
 							</a>
 							<a asp-controller="Invoice" asp-action="DeleteInvoice" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+							<a asp-controller="Invoice" asp-action="DownloadInvoice" asp-route-Id="@item.Id" class="btn btn-primary">
+								Download PDF
+							</a>
+
 						</td>
+
 					</tr>
 				}
 			}
