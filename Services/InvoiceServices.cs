@@ -143,10 +143,34 @@ namespace InvoiceGenerator.Services
                 return new BaseResponse<InvoiceDto> { Message = $"Error :  {ex.Message}", IsSuccessful = false, Data = new InvoiceDto() };
             }
         }
-
-        public async Task<Invoice> GetInvoiceById(Guid Id)
+        public async Task<BaseResponse<InvoiceDto>> GetInvoiceById(Guid Id)
         {
-            return await _dbContext.Invoices.FirstOrDefaultAsync();
+            try
+            {
+                var invoice = await _InvoiceRepository.GetInvoiceById(Id);
+
+                if (invoice != null)
+                {
+                    var data = new InvoiceDto
+                    {
+                        Id = invoice.Id,
+                        BuyerName = invoice.BuyerName,
+                        Address = invoice.Address,
+                        AreaOfCoverage = invoice.AreaOfCoverage,
+                        ServiceRenderred = invoice.ServiceRenderred,
+                        ServiceStartDate = invoice.ServiceStartDate,
+                        ServiceEndDate = invoice.ServiceEndDate,
+                        TotalCost = invoice.TotalCost,
+                    };
+                    return new BaseResponse<InvoiceDto> { Message = "Data retrieved successfully", IsSuccessful = true, Data = data };
+                }
+
+                return new BaseResponse<InvoiceDto> { Message = "No record", IsSuccessful = false, Data = new InvoiceDto() };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse<InvoiceDto> { Message = $"Error :  {ex.Message}", IsSuccessful = false, Data = new InvoiceDto() };
+            }
         }
 
         public List<SelectServiceDto> GetServiceSelect()

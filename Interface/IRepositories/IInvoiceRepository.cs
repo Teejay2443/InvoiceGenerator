@@ -6,5 +6,6 @@ namespace InvoiceGenerator.Interface.IRepositories
     {
         Task<Invoice> GetInvoiceAsync(Guid Id);
         Task<List<Invoice>> GetAllInvoicesAsync();
+        Task<Invoice> GetInvoiceById(Guid Id);
     }
 }

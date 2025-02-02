@@ -22,6 +22,10 @@ namespace InvoiceGenerator.Repository
         {
             return await _dbContext.Invoices.Where(x => x.Id == Id).FirstOrDefaultAsync();
         }
+        public async Task<Invoice> GetInvoiceById(Guid Id)
+        {
+            return await _dbContext.Invoices.Where(x => x.Id == Id).FirstOrDefaultAsync();
+        }
 
 
     }

@@ -69,6 +69,5 @@ namespace InvoiceGenerator.Controllers
             }
             return RedirectToAction("Areas");
         }
-
     }
 }
